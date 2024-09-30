@@ -7,7 +7,7 @@ from errors import errorsBp
 app = Flask(__name__)
 CORS(app)
 
-app.register_blueprint(main_handler)
+# app.register_blueprint(main_handler)
 app.register_blueprint(errorsBp)
 
 @app.route('/', methods=['GET'])
@@ -15,7 +15,7 @@ def get_server():
     return jsonify({
         "status" : {
             "code" : 200,
-            "message" : "This the Back-End server of Day Trips Optimization"
+            "message" : "Welcome to the Back-End server of Day Trips Optimization!"
         },
         "data" : None
     }), 200
