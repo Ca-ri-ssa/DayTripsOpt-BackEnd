@@ -1,7 +1,7 @@
 import os
 from flask import Flask, jsonify
 from flask_cors import CORS
-from handler import main_handler
+# from handler import main_handler
 from errors import errorsBp
 
 app = Flask(__name__)
