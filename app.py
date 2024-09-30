@@ -1,24 +1,26 @@
-from flask import Flask, jsonify, request
+import os
+from flask import Flask, jsonify
 from flask_cors import CORS
+from handler import main_handler
+from errors import errorsBp
 
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/', methods=['GET'])
-def get_data():
-    data = {
-        'message' : 'Hello, this is Flask server',
-        'status' : 'success'
-    }
-    return jsonify(data), 200
+app.register_blueprint(main_handler)
+app.register_blueprint(errorsBp)
 
-@app.route('/api', methods=['GET'])
-def get_api():
-    api = {
-        'message' : 'Hi this is api',
-        'status' : 'success'
-    }
-    return jsonify(api), 201
+@app.route('/', methods=['GET'])
+def get_server():
+    return jsonify({
+        "status" : {
+            "code" : 200,
+            "message" : "This the Back-End server of Day Trips Optimization"
+        },
+        "data" : None
+    }), 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,
+            host="0.0.0.0",
+            port=int(os.environ.get("PORT", 5000)))
