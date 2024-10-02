@@ -1,13 +1,11 @@
 import os
 from flask import Flask, jsonify
 from flask_cors import CORS
-# from handler import main_handler
 from errors import errorsBp
 
 app = Flask(__name__)
 CORS(app)
 
-# app.register_blueprint(main_handler)
 app.register_blueprint(errorsBp)
 
 @app.route('/', methods=['GET'])
