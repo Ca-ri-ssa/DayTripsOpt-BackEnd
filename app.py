@@ -2,6 +2,7 @@ import os
 from flask import Flask, jsonify
 from flask_cors import CORS
 from errors import errorsBp
+from auth import auth
 
 app = Flask(__name__)
 CORS(app)
@@ -9,6 +10,7 @@ CORS(app)
 app.register_blueprint(errorsBp)
 
 @app.route('/', methods=['GET'])
+@auth.login_required
 def get_server():
     return jsonify({
         "status" : {
